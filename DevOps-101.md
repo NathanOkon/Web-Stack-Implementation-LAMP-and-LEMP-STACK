@@ -27,7 +27,7 @@ TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are two wid
 
 -TCP is slower compared to UDP due to the overhead of managing connections and ensuring reliability.<br>
 
-## UDP (User Datagram Protocol):<br>
+## UDP (User Datagram Protocol):<br>.
 
 -UDP is a connectionless protocol, meaning it does not establish a dedicated connection before sending data.<br>
 
