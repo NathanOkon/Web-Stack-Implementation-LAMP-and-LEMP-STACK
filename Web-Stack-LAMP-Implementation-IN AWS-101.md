@@ -6,7 +6,7 @@ _The LAMP stack is a popular open-source web development platform that consists 
 
 __1.__ EC2 Instance of t2.micro type and Ubuntu 24.04 LTS (HVM) was lunched in the us-east-1 region using the AWS console.
 
-![Launch](./LAMP-in-AWS-101/Images/Lunch_instance.png)
+![Launch](../Images/Lunch_instance.png)
 ![Lunch_instance-2](./LAMP-in-AWS-101/Images/Lunch_instance-2.png)
 
 __2.__ Created SSH key pair named __my-ec2-key__ to access the instance on port 22
