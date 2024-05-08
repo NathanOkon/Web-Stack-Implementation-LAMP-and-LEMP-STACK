@@ -6,10 +6,10 @@ _The LAMP stack is a popular open-source web development platform that consists 
 
 __1.__ EC2 Instance of t2.micro type and Ubuntu 24.04 LTS (HVM) was lunched in the us-east-1 region using the AWS console.
 
-![Launch](./LAMP-in-AWS-101/Images/Lunch_instance.png)
-![Lunch_instance-2](./LAMP-in-AWS-101/Images/Lunch_instance-2.png)
+![Launch](./Image/Lunch_instance.png)
+![Lunch_instance-2](./Image/Lunch_instance-2.png)
 
-__2.__ Created SSH key pair named __my-ec2-key__ to access the instance on port 22
+__2.__ Created SSH key pair named __my-ec2-key__ to access the instance on port 22ogit
 
 __3.__ The security group was configured with the following inbound rules:
 
@@ -17,7 +17,7 @@ __3.__ The security group was configured with the following inbound rules:
 - Allow traffic on port 443 (HTTPS) with source from anywhere on the internet.
 - Allow traffic on port 22 (SSH) with source from any IP address. This is opened by default.
 
-![Launch_instance-3](./LAMP-in-AWS-101/Images/Launch_instance-3.png)
+![Launch_instance-3](./Image/Launch_instance-3.png)
 
 __4.__ The default VPC and Subnet was used for the networking configuration.
 
@@ -31,7 +31,7 @@ ssh -i "Dkey.pem" ubuntu@ec2-51-20-7-250.eu-north-1.compute.amazonaws.com
 ```
 Where __username=ubuntu__ and __public ip address=51-20-7-250__
 
-![Terminal-1](./LAMP-in-AWS-101/Images/Terminal-1.png)
+![Terminal-1](./Image/Terminal-1.png)
 
 # Step 1 - Install Apache and Update the Firewall
 
@@ -42,14 +42,14 @@ sudo apt update
 sudo apt upgrade -y
 ```
 
-![Terminal-2](./LAMP-in-AWS-101/Images/Terminal-2.png)
-![Terminal-3](./LAMP-in-AWS-101/Images/Terminal%203.png)
+![Terminal-2](./Image/Terminal-2.png)
+![Terminal-3](./Image/Terminal%203.png)
 
 __2.__ __Run apache2 package installation__
 ```
 sudo apt install apache2 
 ```
-![Terminal-4](./LAMP-in-AWS-101/Images/Terminal-4.png)
+![Terminal-4](./Image/Terminal-4.png)
 
 __3.__ __Enable and verify that apache is running on as a service on the OS.__
 ```
@@ -57,7 +57,7 @@ sudo systemctl enable apache2
 sudo systemctl status apache2
 ```
 If it green and running, then apache2 is correctly installed
-![Termainal-5](./LAMP-in-AWS-101/Images/Terminal-5.png)
+![Termainal-5](./Image/Terminal-5.png)
 
 __4.__ __The server is running and can be accessed locally in the ubuntu shell by running the command below:__
 
@@ -66,21 +66,21 @@ curl http://localhost:80
 OR
 curl http://127.0.0.1:80
 ```
-![Termainal-6](./LAMP-in-AWS-101/Images/Terminal-6.png)
+![Termainal-6](./Image/Terminal-6.png)
 
 __5.__ __Test with the public IP address if the Apache HTTP server can respond to request from the internet using the url on a browser.__
 
 ```
 http://184.72.210.143:80
 ```
-![default-page](./LAMP-in-AWS-101/Images/defualt-page.png)
+![default-page](./Image/defualt-page.png)
 This shows that the web server is correctly installed and it is accessible throuhg the firewall.
 
 __6.__ __Another way to retrieve the public ip address other than check the aws console__
 ```
 curl -s http://169.254.169.254/latest/meta-data/public-ipv4
 ```
-![Terminal](./LAMP-in-AWS-101/Images/Terminals-7.png)
+![Terminal](./Image/Terminals-7.png)
 
 ## Step 2 - Install MySQL
 
@@ -90,7 +90,7 @@ MySQL was installed in this project. It is a popular relational database managem
 ```
 sudo apt install mysql-server
 ```
-![Termainal-8](./LAMP-in-AWS-101/Images/Terminal-8.png)
+![Termainal-8](./Image/Terminal-8.png)
 
 This connects to the MySQL server as the administrative database user __root__ infered by the use of __sudo__ when running the command.
 
@@ -101,7 +101,7 @@ Here, the user's password was defined as "Admin0001$"
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Admin0001$';
 ```
 
-![Terminal-9](./LAMP-in-AWS-101/Images/Terminal-9.png)
+![Terminal-9](./Image/Terminal-9.png)
 Exit the MySQL shell
 ```
 exit
@@ -112,7 +112,7 @@ The security script comes pre-installed with mysql. This script removes some ins
 ```
 sudo mysql_secure_installation
 ```
-![Terminal](./LAMP-in-AWS-101/Images/Terminal-10.png)
+![Terminal](./Image/Terminal-10.png)
 
 Regardless of whether the VALIDATION PASSWORD PLUGIN is set up, the server will ask to select and confirm a password for MySQL root user.
 
@@ -122,7 +122,7 @@ A command prompt for password was noticed after running the command below.
 ```
 sudo mysql -p
 ```
-![Terminal-11](./LAMP-in-AWS-101/Images/Terminal-11.png)
+![Terminal-11](./Image/Terminal-11.png)
 
 
 ## Step 3 - Install PHP
@@ -138,13 +138,13 @@ The following were installed:
 ```
 sudo apt install php libapache2-mod-php php-mysql
 ```
-![Terminal-12](./LAMP-in-AWS-101/Images/Terminal-12.png)
+![Terminal-12](./Image/Terminal-12.png)
 
 Confirm the PHP version
 ```
 php -v
 ```
-![Termianl-13](./LAMP-in-AWS-101/Images/Terminal-13.png)
+![Termianl-13](./Image/Terminal-13.png)
 At this ponit, the LAMP stack is completely installed and fully operational.
 
 To tset the set up with a PHP script, it's best to set up a proper Apache Virtual Host to hold the website files and folders. Virtual host allows to have multiple websites located on a single machine and it won't be noticed by the website users.
@@ -162,7 +162,7 @@ __Assign the directory ownership with $USER environment variable which reference
 ```
 sudo chown -R $USER:$USER /var/www/projectlamp
 ```
-![Terminal-14](./LAMP-in-AWS-101/Images/Terminal-14.png)
+![Terminal-14](./Image/Terminal-14.png)
 
 __2.__ __Create and open a new configuration file in apache’s “sites-available” directory using vim.__
 ```
@@ -180,7 +180,7 @@ Past in the bare-bones configuration below:
   CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-![Terminal-15](./LAMP-in-AWS-101/Images/Terminal-15.png)
+![Terminal-15](./Image/Terminal-15.png)
 
 
 __3.__ __Show the new file in sites-available__
@@ -191,7 +191,7 @@ sudo ls /etc/apache2/sites-available
 Output:
 000-default.conf default-ssl.conf projectlamp.conf
 ```
-![Terminal](./LAMP-in-AWS-101/Images/Terminal-16.png)
+![Terminal](./Image/Terminal-16.png)
 
 With the VirtualHost configuration, Apache will serve projectlamp using /var/www/projectlamp as its web root directory.
 
@@ -199,8 +199,8 @@ __4.__ __Enable the new virtual host__
 ```
 sudo a2ensite projectlamp
 ```
-![Terminal-17](./LAMP-in-AWS-101/Images/Terminal-17.png)
-![Enable virtual host](./LAMP-in-AWS-101/Images/defualt-page.png)
+![Terminal-17](./Image/Terminal-17.png)
+![Enable virtual host](./Image/Picture%201.png)
 
 __5.__ __Disable apache’s default website.__
 
@@ -220,13 +220,13 @@ __7.__ __Reload apache for changes to take effect.__
 ```
 sudo systemctl reload apache2
 ```
-![Terminal-18](./LAMP-in-AWS-101/Images/Terminal-18.png)
+![Terminal-18](./Image/Terminal-18.png)
 
 __8.__ __The new website is now active but the web root /var/www/projectlamp is still empty. Create an index.html file in this location so to test the virtual host work as expected.__
 ```
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
 ```
-![Terminal-19](./LAMP-in-AWS-101/Images/Terminal-19.png)
+![Terminal-19](./Image/Terminal-19.png)
 
 __9.__ __Open the website on a browser using the public IP address.__
 ```
@@ -258,7 +258,7 @@ sudo vim /etc/apache2/mods-enabled/dir.conf
   DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
 ```
-![Terminal](./LAMP-in-AWS-101/Images/Terminal-20.png)
+![Terminal](./Image/Terminal-20.png)
 
 
 __2.__ __Reload Apache__
@@ -281,11 +281,11 @@ __Add the text below in the index.php file__
 <?php
 phpinfo();
 ```
-![Terminal-21](./LAMP-in-AWS-101/Images/Terminal-21.png)
+![Terminal-21](./Image/Terminal-21.png)
 
 
 __4.__ __Now refresh the page__
-![php-01](./LAMP-in-AWS-101/Images/Php01.png)
+![php-01](./Image/Php01.png)
 
 This page provides information about the server from the perspective of PHP. It is useful for debugging and to ensure the settings are being applied correctly.
 
