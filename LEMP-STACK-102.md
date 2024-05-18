@@ -88,6 +88,7 @@ The security script comes pre-installed with mysql. This script removes some ins
 sudo mysql_secure_installation
 ```
 ![T29](./Image/T29.png)
+
 __6.__ __After changing root user password, log in to MySQL console.__
 
 A command prompt for password was noticed after running the command below.
