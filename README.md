@@ -4,12 +4,12 @@ The LEMP software stack is a group of software that can be used to serve dynamic
 
 This guide demonstrates how to install a LEMP stack on an Ubuntu 20.04 server using EC2
 
-**Prerequisites**
-_._AWS Account_
-_._Launch EC2 with Ubuntu_
+##Prerequisites##
+__1.__ __AWS Account__
+__2.__Launch EC2 with Ubuntu__
 
 **Setup a LAMP Stack on Ubuntu**
-Install Nginx
+__1.__ _Install Nginx__
 Install MySQL Database
 Install PHP
 Setup Virtual Webhost
